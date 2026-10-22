@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MODA LUXE | دار الأزياء الراقية</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #090a0d;
+      --card-bg: #12151c;
+      --card-surface: #181c25;
+      --border: rgba(212, 175, 55, 0.22);
+      --gold: #d4af37;
+      --gold-light: #f5e7b2;
+      --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+      --text: #f8fafc;
+      --muted: #8e9baa;
+      --green: #25d366;
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 95px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* VIP Top Navigation */
+    .vip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 4px 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .brand-wrap h1 {
+      font-family: 'Playfair Display', 'Cairo', serif;
+      font-size: 1.45rem;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+
+    .brand-wrap p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .icon-btn:active { transform: scale(0.92); }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: var(--gold);
+      color: #000;
+      font-size: 0.68rem;
+      font-weight: 900;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* AI Stylist Banner */
+    .ai-stylist-banner {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(18, 21, 28, 0.9));
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    .ai-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ai-sparkle-box {
+      width: 38px;
+      height: 38px;
+      background: var(--gold-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 1.1rem;
+    }
+
+    .ai-banner-content h4 { font-size: 0.82rem; font-weight: 800; color: var(--gold-light); }
+    .ai-banner-content p { font-size: 0.68rem; color: var(--muted); }
+
+    /* Live Search Bar */
+    .search-box {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px 10px 38px;
+      font-size: 0.85rem;
+      color: #fff;
+      outline: none;
+    }
+
+    .search-box input:focus { border-color: var(--gold); }
+    .search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Category Filter Tabs */
+    .categories-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+    .categories-bar::-webkit-scrollbar { display: none; }
+
+    .cat-btn {
+      flex: 0 0 auto;
+      padding: 7px 15px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .cat-btn.active {
+      background: var(--gold-gradient);
+      color: #090a0d;
+      border-color: var(--gold);
+      font-weight: 800;
+    }
+
+    /* Product Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .product-card:hover { border-color: var(--border); }
+
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      overflow: hidden;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .card-img-wrap img { transform: scale(1.04); }
+
+    .badge-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      color: var(--gold-light);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .product-info {
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .product-price {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    /* Color Swatches */
+    .color-swatches {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .swatch-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .swatch-dot.active {
+      border-color: var(--gold);
+      transform: scale(1.15);
+    }
+
+    /* Size selector pills */
+    .size-selector {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .size-pill {
+      font-size: 0.68rem;
+      padding: 3px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+      cursor: pointer;
+      background: var(--card-surface);
+    }
+
+    .size-pill.selected {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.15);
+      font-weight: 800;
+    }
+
+    .add-btn {
+      width: 100%;
+      background: var(--card-surface);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      padding: 8px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .add-btn:active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* Floating Cart Checkout Bar */
+    .cart-float-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(18, 21, 28, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 900;
+    }
+
+    .cart-float-inner {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-total-text span {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: block;
+    }
+
+    .cart-total-text strong {
+      font-size: 1.15rem;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .checkout-btn {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Modal Sheet Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: #141720;
+      width: 100%;
+      max-width: 500px;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 20px 16px;
+      max-height: 88vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-header h3 { font-size: 1.05rem; color: var(--gold-light); font-weight: 800; }
+    .close-btn { background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
+
+    .cart-items-list {
+      margin-bottom: 14px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      padding: 8px 12px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cart-item-info strong { display: block; color: #fff; font-size: 0.82rem; }
+    .cart-item-info small { color: var(--gold); font-size: 0.72rem; }
+
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qty-btn {
+      background: var(--card-surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Coupon Box */
+    .coupon-box {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .coupon-input {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      outline: none;
+      text-transform: uppercase;
+    }
+
+    .coupon-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    /* Form Fields */
+    .form-label { font-size: 0.76rem; color: var(--muted); margin-bottom: 4px; display: block; font-weight: 600; }
+    .form-input, .form-select {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      padding: 9px 12px;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .cost-summary {
+      background: var(--card-bg);
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      margin-bottom: 14px;
+      font-size: 0.82rem;
+    }
+
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      color: var(--muted);
+    }
+
+    .cost-row.total {
+      border-top: 1px dashed var(--border);
+      padding-top: 6px;
+      font-weight: 800;
+      color: var(--gold-light);
+      font-size: 0.95rem;
+    }
+
+    .submit-order-btn {
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* AI Stylist Modal */
+    .stylist-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stylist-result {
+      display: none;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- VIP Header -->
+    <header class="vip-header">
+      <div class="brand-wrap">
+        <h1>MODA LUXE</h1>
+        <p>الأناقة الفاخرة • تسليم مباشر</p>
+      </div>
+      <div class="header-actions">
+        <div class="icon-btn" onclick="openStylistModal()" title="المستشار الذكي">
+          <i class="fas fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="icon-btn" onclick="openCartModal()">
+          <i class="fas fa-shopping-bag"></i>
+          <div class="cart-badge" id="cartBadge">0</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- AI Stylist Banner -->
+    <div class="ai-stylist-banner" onclick="openStylistModal()">
+      <div class="ai-banner-content">
+        <div class="ai-sparkle-box">
+          <i class="fas fa-gem"></i>
+        </div>
+        <div>
+          <h4>المستشار الذكي لتحديد المقاس والتنسيق</h4>
+          <p>احصل على المقاس الدقيق وتنسيق القطع المناسبة لجسمك</p>
+        </div>
+      </div>
+      <i class="fas fa-chevron-left" style="color:var(--gold); font-size:0.8rem;"></i>
+    </div>
+
+    <!-- Live Search -->
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="ابحث عن قطعة، لون، أو موديل..." oninput="handleSearch()">
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="categories-bar">
+      <button class="cat-btn active" onclick="filterCategory('all', this)">كل المجموعات</button>
+      <button class="cat-btn" onclick="filterCategory('vip', this)">🌟 تشكيلة الـ VIP</button>
+      <button class="cat-btn" onclick="filterCategory('men', this)">رجالي فاخر</button>
+      <button class="cat-btn" onclick="filterCategory('women', this)">نسائي راقي</button>
+      <button class="cat-btn" onclick="filterCategory('winter', this)">معاطف وشتاء</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productsGrid"></div>
+
+  </div>
+
+  <!-- Bottom Floating Bar -->
+  <aside class="cart-float-bar">
+    <div class="cart-float-inner">
+      <div class="cart-total-text">
+        <span>إجمالي الحقيبة:</span>
+        <strong id="barTotal">0 ل.س</strong>
+      </div>
+      <button class="checkout-btn" onclick="openCartModal()">
+        <i class="fab fa-whatsapp"></i> إتمام الطلب
+      </button>
+    </div>
+  </aside>
+
+  <!-- Cart & Checkout Modal -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-crown" style="color:var(--gold);"></i> حقيبة المشتريات</h3>
+        <button class="close-btn" onclick="closeCartModal()">&times;</button>
+      </div>
+
+      <!-- Items -->
+      <div class="cart-items-list" id="cartList"></div>
+
+      <!-- Coupon -->
+      <label class="form-label">كوبون خصم VIP (جرب كود: VIP10)</label>
+      <div class="coupon-box">
+        <input type="text" id="couponCode" class="coupon-input" placeholder="أدخل الكوبون...">
+        <button class="coupon-btn" onclick="applyCoupon()">تطبيق</button>
+      </div>
+
+      <!-- Customer Form -->
+      <label class="form-label">الاسم الكامل</label>
+      <input type="text" id="clientName" class="form-input" placeholder="اسمك الكريم">
+
+      <label class="form-label">المدينة / المحافظة</label>
+      <select id="clientCity" class="form-select" onchange="calcShipping()">
+        <option value="دمشق" data-cost="25000">دمشق وريفها (شحن سريع 25,000 ل.س)</option>
+        <option value="طرطوس" data-cost="20000">طرطوس (تسليم فوري 20,000 ل.س)</option>
+        <option value="اللاذقية" data-cost="20000">اللاذقية (شحن 20,000 ل.س)</option>
+        <option value="حمص" data-cost="25000">حمص (شحن 25,000 ل.س)</option>
+        <option value="حلب" data-cost="30000">حلب (شحن 30,000 ل.س)</option>
+        <option value="محافظة أخرى" data-cost="30000">باقي المحافظات (30,000 ل.س)</option>
+      </select>
+
+      <label class="form-label">العنوان بالتفصيل ورقم بديل</label>
+      <input type="text" id="clientAddress" class="form-input" placeholder="الحي، الشارع، علامة مميزة...">
+
+      <!-- Cost Calculation -->
+      <div class="cost-summary">
+        <div class="cost-row">
+          <span>قيمة المنتجات:</span>
+          <span id="subTotalText">0 ل.س</span>
+        </div>
+        <div class="cost-row" id="discountRow" style="display:none; color:#10b981;">
+          <span>الخصم المطبق:</span>
+          <span id="discountText">0 ل.س</span>
+        </div>
+        <div class="cost-row">
+          <span>أجور التوصيل:</span>
+          <span id="shippingText">25,000 ل.س</span>
+        </div>
+        <div class="cost-row total">
+          <span>المبلغ الإجمالي النهائي:</span>
+          <span id="grandTotalText">0 ل.س</span>
+        </div>
+      </div>
+
+      <button class="submit-order-btn" onclick="sendVipWhatsAppOrder()">
+        <i class="fab fa-whatsapp" style="font-size:1.15rem;"></i> تأكيد الطلب المباشر عبر واتساب
+      </button>
+    </div>
+  </div>
+
+  <!-- AI Stylist Advisor Modal -->
+  <div class="modal-overlay" id="stylistModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-wand-magic-sparkles" style="color:var(--gold);"></i> المستشار الذكي للأناقة والمقاس</h3>
+        <button class="close-btn" onclick="closeStylistModal()">&times;</button>
+      </div>
+
+      <div class="stylist-card">
+        <p style="font-size:0.8rem; color:var(--muted); margin-bottom:12px;">أدخل بياناتك التقريبية وسيقوم المساعد الذكي باقتراح المقاس الدقيق وتنسيق القطع المناسبة لك:</p>
+        
+        <label class="form-label">الطول التقريبي (سم)</label>
+        <input type="number" id="userHeight" class="form-input" placeholder="مثال: 175">
+
+        <label class="form-label">الوزن التقريبي (كغ)</label>
+        <input type="number" id="userWeight" class="form-input" placeholder="مثال: 72">
+
+        <label class="form-label">طبيعة المناسبة</label>
+        <select id="userOccasion" class="form-select">
+          <option value="casual">يومي كاجوال مريح</option>
+          <option value="formal">عمل واجتماعات رسمية</option>
+          <option value="party">سهرة ومناسبة خاصة</option>
+        </select>
+
+        <button class="add-btn" style="background:var(--gold); color:#000; font-weight:900;" onclick="generateAiAdvice()">
+          تحليل واقتراح التنسيق والمقاس
+        </button>
+
+        <div class="stylist-result" id="stylistResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+        // بيانات المنتجات الفاخرة مع الألوان والمقاسات
+    const products = [
+      {
+        id: 1,
+        title: "بليزر كشمير إيطالي دبل بريست",
+        price: 520000,
+        category: "vip",
+        image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500&q=80",
+        tag: "VIP الأكثر طلباً",
+        colors: ["#1e293b", "#0f172a", "#78350f"],
+        sizes: ["48", "50", "52", "54"]
+      },
+      {
+        id: 2,
+        title: "فستان حرير أسود ملكي ميدي",
+        price: 460000,
+        category: "women",
+        image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80",
+        tag: "إصدار حصري",
+        colors: ["#000000", "#450a0a", "#1e1b4b"],
+        sizes: ["S", "M", "L"]
+      },
+      {
+        id: 3,
+        title: "معطف صوف شتوي بريطاني جملي",
+        price: 680000,
+        category: "winter",
+        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=500&q=80",
+        tag: "شتوي فاخر",
+        colors: ["#b45309", "#1f2937"],
+        sizes: ["M", "L", "XL"]
+      },
+      {
+        id: 4,
+        title: "قميص كتان ملكي أبيض بقصة سليم",
+        price: 210000,
+        category: "men",
+        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80",
+        tag: "أساسي",
+        colors: ["#ffffff", "#94a3b8", "#1e3a8a"],
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 5,
+        title: "هودي أوفر سايز صوف قطني نخب أول",
+        price: 245000,
+        category: "men",
+        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=500&q=80",
+        tag: "تريند الموسم",
+        colors: ["#d97706", "#374151", "#0284c7"],
+        sizes: ["M", "L", "XL"]
+      },
+      {
+        id: 6,
+        title: "طقم ساتان قطعتين للسهرات",
+        price: 395000,
+        category: "women",
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=500&q=80",
+        tag: "تشكيلة جديدة",
+        colors: ["#059669", "#d97706", "#7c3aed"],
+        sizes: ["S", "M"]
+      }
+    ];
+
+    let cart = [];
+    let currentCategory = 'all';
+    let discountPercent = 0;
+    const selectedOptions = {};
+
+    function renderProducts(list) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+
+      if (list.length === 0) {
+        grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:40px 10px; color:var(--muted);">لا توجد قطع مطابقة للبحث حالياً</div>`;
+        return;
+      }
+
+      list.forEach(p => {
+        if (!selectedOptions[p.id]) {
+          selectedOptions[p.id] = { size: p.sizes[0], color: p.colors[0] };
+        }
+
+        const swatchesHtml = p.colors.map(c => `
+          <div class="swatch-dot ${selectedOptions[p.id].color === c ? 'active' : ''}" 
+               style="background:${c};" 
+               onclick="selectColor(${p.id}, '${c}', this)"></div>
+        `).join('');
+
+        const sizesHtml = p.sizes.map(s => `
+          <span class="size-pill ${selectedOptions[p.id].size === s ? 'selected' : ''}" 
+                onclick="selectSize(${p.id}, '${s}', this)">${s}</span>
+        `).join('');
+
+        grid.innerHTML += `
+          <div class="product-card">
+            <div class="card-img-wrap">
+              <img src="${p.image}" alt="${p.title}" loading="lazy">
+              <span class="badge-tag">${p.tag}</span>
+            </div>
+            <div class="product-info">
+              <div>
+                <h4 class="product-title">${p.title}</h4>
+                <div class="product-price">${p.price.toLocaleString()} ل.س</div>
+                <div class="color-swatches">${swatchesHtml}</div>
+                <div class="size-selector">${sizesHtml}</div>
+              </div>
+              <button class="add-btn" onclick="addToCart(${p.id})">
+                <i class="fas fa-shopping-bag"></i> أضف للحقيبة
+              </button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    window.filterCategory = (cat, btn) => {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (cat === 'all') {
+        renderProducts(products);
+      } else {
+        renderProducts(products.filter(p => p.category === cat));
+      }
+    };
+
+    window.handleSearch = () => {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      let filtered = (currentCategory === 'all') ? products : products.filter(p => p.category === currentCategory);
+      if (q) {
+        filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.tag.toLowerCase().includes(q));
+      }
+      renderProducts(filtered);
+    };
+
+    window.selectColor = (id, color, elm) => {
+      selectedOptions[id].color = color;
+      elm.parentElement.querySelectorAll('.swatch-dot').forEach(d => d.classList.remove('active'));
+      elm.classList.add('active');
+    };
+
+    window.selectSize = (id, size, elm) => {
+      selectedOptions[id].size = size;
+      elm.parentElement.querySelectorAll('.size-pill').forEach(s => s.classList.remove('selected'));
+      elm.classList.add('selected');
+    };
+
+    window.addToCart = (id) => {
+      const p = products.find(x => x.id === id);
+      const opts = selectedOptions[id];
+
+      const exist = cart.find(item => item.id === id && item.size === opts.size && item.color === opts.color);
+      if (exist) {
+        exist.qty += 1;
+      } else {
+        cart.push({
+          id: p.id,
+          title: p.title,
+          price: p.price,
+          size: opts.size,
+          color: opts.color,
+          qty: 1
+        });
+      }
+      updateCartUI();
+    };
+
+    function updateCartUI() {
+      const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+      document.getElementById('cartBadge').textContent = totalQty;
+      document.getElementById('barTotal').textContent = subtotal.toLocaleString() + ' ل.س';
+      document.getElementById('subTotalText').textContent = subtotal.toLocaleString() + ' ل.س';
+
+      const list = document.getElementById('cartList');
+      if (cart.length === 0) {
+        list.innerHTML = `<p style="text-align:center; color:var(--muted); padding:20px;">الحقيبة فارغة حالياً</p>`;
+      } else {
+        list.innerHTML = cart.map((item, idx) => `
+          <div class="cart-item-row">
+            <div class="cart-item-info">
+              <strong>${item.title}</strong>
+              <small>المقاس: ${item.size} | ${(item.price * item.qty).toLocaleString()} ل.س</small>
+            </div>
+            <div class="qty-ctrl">
+              <button class="qty-btn" onclick="updateQty(${idx}, -1)">-</button>
+              <span style="font-weight:700; font-size:0.85rem;">${item.qty}</span>
+              <button class="qty-btn" onclick="updateQty(${idx}, 1)">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      calcShipping();
+    }
+
+    window.updateQty = (index, delta) => {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) cart.splice(index, 1);
+      updateCartUI();
+    };
+
+    window.calcShipping = () => {
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const select = document.getElementById('clientCity');
+      let shipCost = parseInt(select.options[select.selectedIndex].getAttribute('data-cost') || 25000);
+
+      if (subtotal >= 600000 && subtotal > 0) {
+        shipCost = 0;
+        document.getElementById('shippingText').innerHTML = `<span style="color:#10b981; font-weight:800;">مجاني (عرض VIP)</span>`;
+      } else {
+        document.getElementById('shippingText').textContent = shipCost.toLocaleString() + ' ل.س';
+      }
+
+      let discountAmount = 0;
+      if (discountPercent > 0) {
+        discountAmount = Math.round(subtotal * (discountPercent / 100));
+        document.getElementById('discountRow').style.display = 'flex';
+        document.getElementById('discountText').textContent = `- ${discountAmount.toLocaleString()} ل.س`;
+      } else {
+        document.getElementById('discountRow').style.display = 'none';
+      }
+
+      const grandTotal = Math.max(0, subtotal - discountAmount + (subtotal > 0 ? shipCost : 0));
+      document.getElementById('grandTotalText').textContent = grandTotal.toLocaleString() + ' ل.س';
+    };
+
+    window.applyCoupon = () => {
+      const code = document.getElementById('couponCode').value.trim().toUpperCase();
+      if (code === 'VIP10') {
+        discountPercent = 10;
+        alert("تم تفعيل خصم 10% الخاص بعملاء VIP بنجاح!");
+      } else {
+        discountPercent = 0;
+        alert("كود الخصم غير صحيح أو منتهي الصلاحية");
+      }
+      calcShipping();
+    };
+
+    window.sendVipWhatsAppOrder = () => {
+      if (cart.length === 0) {
+        alert("يرجى اختيار قطع وإضافتها للحقيبة أولاً");
+        return;
+      }
+
+      const name = document.getElementById('clientName').value.trim();
+      const city = document.getElementById('clientCity').value;
+      const address = document.getElementById('clientAddress').value.trim();
+
+      if (!name || !address) {
+        alert("يرجى تعبئة الاسم والعنوان بالتفصيل لإتمام الحجز والشحن");
+        return;
+      }
+
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const grandTotal = document.getElementById('grandTotalText').textContent;
+      const orderId = "VIP-" + Math.floor(1000 + Math.random() * 9000);
+
+      let itemsText = "";
+      cart.forEach((item, index) => {
+        itemsText += `\n${index + 1}. *${item.title}*\n   - المقاس: [ ${item.size} ]\n   - الكمية: ${item.qty} × ${item.price.toLocaleString()} ل.س`;
+      });
+
+      const message = `تاج الأناقة | طلب شراء VIP رسمي 🛍️
+رقم الفاتورة: ${orderId}
+---------------------------------
+👤 العميل: ${name}
+📍 الوجهة: ${city} - ${address}
+---------------------------------
+📦 تفاصيل القطع:${itemsText}
+---------------------------------
+💵 قيمة المنتجات: ${subtotal.toLocaleString()} ل.س
+${discountPercent > 0 ? `🎟️ خصم الكوبون: ${discountPercent}%\n` : ''}🚚 الشحن: ${document.getElementById('shippingText').innerText}
+💰 *المجموع النهائي واجب الدفع: ${grandTotal}*
+---------------------------------
+يرجى تأكيد الحجز وجدولة الإرسال.`;
+
+      const phone = "963995382496";
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    };
+
+    window.openCartModal = () => {
+      document.getElementById('cartModal').style.display = 'flex';
+      updateCartUI();
+    };
+    window.closeCartModal = () => document.getElementById('cartModal').style.display = 'none';
+
+    window.openStylistModal = () => document.getElementById('stylistModal').style.display = 'flex';
+    window.closeStylistModal = () => document.getElementById('stylistModal').style.display = 'none';
+
+    window.generateAiAdvice = () => {
+      const h = parseInt(document.getElementById('userHeight').value);
+      const w = parseInt(document.getElementById('userWeight').value);
+      const occ = document.getElementById('userOccasion').value;
+      const res = document.getElementById('stylistResult');
+
+      if (!h || !w) {
+        alert("يرجى إدخال الطول والوزن التقريبي");
+        return;
+      }
+
+      let recSize = "M";
+      const bmi = w / ((h / 100) * (h / 100));
+
+      if (bmi < 20) recSize = "S (أو مقاس 48)";
+      else if (bmi >= 20 && bmi <= 25) recSize = "M (أو مقاس 50)";
+      else if (bmi > 25 && bmi <= 29) recSize = "L (أو مقاس 52)";
+      else recSize = "XL إلى XXL (أو مقاس 54)";
+
+      let recPieces = "";
+      if (occ === "formal") recPieces = "ننصحك بتنسيق: *بليزر كشمير إيطالي دبل بريست* مع قميص الكتان الأبيض لإطلالة واثقة وجذابة.";
+      else if (occ === "party") recPieces = "الخيار الأنسب لمناسبتك هو: *فستان الحرير الملكي* أو *طقم الساتان للسهرات*.";
+      else recPieces = "للإطلالة اليومية الفاخرة ننصحك بـ: *كنزة الهودي الصوفية الأوفر سايز* مع بنطال كتان.";
+
+      res.style.display = 'block';
+      res.innerHTML = `
+        <div style="color:var(--gold-light); font-weight:800; margin-bottom:4px;">✨ نتيجة الاستشارة الذكية:</div>
+        <div>• المقاس المثالي الموصى به لجسمك: <strong style="color:var(--gold); font-size:0.95rem;">[ ${recSize} ]</strong></div>
+        <div style="margin-top:6px;">• التنسيق المقترح: ${recPieces}</div>
+      `;
+    };
+
+    window.onclick = (e) => {
+      if (e.target.classList.contains('modal-overlay')) {
+        closeCartModal();
+        closeStylistModal();
+      }
+    };
+
+    renderProducts(products);
+  </script>
+</body>
+</html>
