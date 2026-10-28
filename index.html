@@ -3,28 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MODA LUXE | دار الأزياء الراقية</title>
+  <title>ROYAL CLINIC | المنظومة التخصصية</title>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090a0d;
-      --card-bg: #12151c;
-      --card-surface: #181c25;
-      --border: rgba(212, 175, 55, 0.22);
+      --bg-dark: #070d18;
+      --card-bg: #0f172a;
+      --card-border: #1e293b;
       --gold: #d4af37;
-      --gold-light: #f5e7b2;
-      --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
-      --text: #f8fafc;
-      --muted: #8e9baa;
-      --green: #25d366;
-      --radius: 18px;
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --gold-light: #fef08a;
+      --cyan: #38bdf8;
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+      --green: #10b981;
     }
 
     * {
@@ -33,1049 +28,675 @@
       padding: 0;
       font-family: 'Cairo', sans-serif;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background-color: #030712;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      padding-bottom: 95px;
     }
 
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 16px;
+    /* هيكل التطبيق المحمول */
+    .app-viewport {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      max-height: 900px;
+      background-color: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
     }
 
-    /* VIP Top Navigation */
-    .vip-header {
+    @media (min-width: 480px) {
+      .app-viewport {
+        border-radius: 36px;
+        height: 92vh;
+        border: 4px solid #1e293b;
+      }
+    }
+
+    /* منطقة التمرير للمحتوى */
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 16px 85px;
+      scroll-behavior: smooth;
+    }
+
+    .content-area::-webkit-scrollbar {
+      display: none;
+    }
+
+    .app-screen {
+      display: none;
+      animation: screenFade 0.2s ease-in-out;
+    }
+
+    .app-screen.active {
+      display: block;
+    }
+
+    @keyframes screenFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* بانر الآيفون والإضافة للشاشة */
+    .ios-pwa-banner {
+      border: 1px dashed rgba(56, 189, 248, 0.4);
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 0.76rem;
+      color: #7dd3fc;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 4px 16px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      line-height: 1.4;
     }
 
-    .brand-wrap h1 {
-      font-family: 'Playfair Display', 'Cairo', serif;
-      font-size: 1.45rem;
-      letter-spacing: 1px;
-      color: var(--gold-light);
-      margin-bottom: 2px;
+    .ios-icon {
+      font-size: 1.2rem;
+      color: #fff;
     }
 
-    .brand-wrap p {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-btn {
-      position: relative;
+    /* ترويسة العيادة */
+    .clinic-brand-row {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 12px 16px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .clinic-titles {
+      text-align: right;
+    }
+
+    .brand-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      font-style: italic;
       color: var(--gold);
-      cursor: pointer;
-      transition: var(--transition);
+      letter-spacing: 1px;
     }
 
-    .icon-btn:active { transform: scale(0.92); }
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: -2px;
+    }
 
-    .cart-badge {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      background: var(--gold);
-      color: #000;
-      font-size: 0.68rem;
-      font-weight: 900;
-      width: 19px;
-      height: 19px;
-      border-radius: 50%;
+    .online-badge {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--green);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 20px;
     }
 
-    /* AI Stylist Banner */
-    .ai-stylist-banner {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(18, 21, 28, 0.9));
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
+    .green-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+
+    /* كارت الدور المباشر */
+    .live-queue-card {
+      background: linear-gradient(135deg, #0f1d36 0%, #0b172a 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 20px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .queue-info-text {
+      text-align: right;
+    }
+
+    .queue-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .queue-note {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin: 3px 0 5px;
+    }
+
+    .queue-status {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .queue-box-badge {
+      background: linear-gradient(135deg, #fef08a, #d4af37);
+      color: #000;
+      padding: 10px 14px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .queue-box-badge span {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .queue-box-badge strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* شبكة الأزرار الأربعة السريعة */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .action-tile {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
       padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .ai-banner-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .ai-sparkle-box {
-      width: 38px;
-      height: 38px;
-      background: var(--gold-gradient);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-size: 1.1rem;
-    }
-
-    .ai-banner-content h4 { font-size: 0.82rem; font-weight: 800; color: var(--gold-light); }
-    .ai-banner-content p { font-size: 0.68rem; color: var(--muted); }
-
-    /* Live Search Bar */
-    .search-box {
-      position: relative;
-      margin-bottom: 14px;
-    }
-
-    .search-box input {
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px 14px 10px 38px;
-      font-size: 0.85rem;
-      color: #fff;
-      outline: none;
-    }
-
-    .search-box input:focus { border-color: var(--gold); }
-    .search-box i {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    /* Category Filter Tabs */
-    .categories-bar {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 16px;
-      scrollbar-width: none;
-    }
-    .categories-bar::-webkit-scrollbar { display: none; }
-
-    .cat-btn {
-      flex: 0 0 auto;
-      padding: 7px 15px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .cat-btn.active {
-      background: var(--gold-gradient);
-      color: #090a0d;
+    .action-tile:active {
+      transform: scale(0.97);
       border-color: var(--gold);
+    }
+
+    .tile-texts {
+      text-align: right;
+    }
+
+    .tile-title {
+      font-size: 0.85rem;
       font-weight: 800;
+      color: #fff;
     }
 
-    /* Product Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+    .tile-desc {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-top: 1px;
     }
 
-    .product-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius);
-      overflow: hidden;
+    .tile-icon {
+      font-size: 1.4rem;
+    }
+
+    /* المعرض السريري المقارن */
+    .gallery-head {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
       display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow);
-      position: relative;
-      transition: var(--transition);
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
     }
 
-    .product-card:hover { border-color: var(--border); }
+    .gallery-head span {
+      color: var(--gold);
+    }
 
-    .card-img-wrap {
+    .compare-wrapper {
       position: relative;
       width: 100%;
-      height: 190px;
+      height: 360px;
+      border-radius: 24px;
       overflow: hidden;
+      border: 1px solid var(--card-border);
     }
 
-    .card-img-wrap img {
+    .compare-side {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
+      background-size: cover;
+      background-position: center top;
     }
 
-    .product-card:hover .card-img-wrap img { transform: scale(1.04); }
+    .img-state-before {
+      background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80');
+    }
 
-    .badge-tag {
+    .img-state-after {
+      background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80');
+      width: 50%;
+      border-left: 2px solid var(--gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .compare-range {
       position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      color: var(--gold-light);
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-    }
-
-    .product-info {
-      padding: 10px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #fff;
-      line-height: 1.3;
-    }
-
-    .product-price {
-      font-size: 0.95rem;
-      font-weight: 900;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    /* Color Swatches */
-    .color-swatches {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 8px;
-      align-items: center;
-    }
-
-    .swatch-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: var(--transition);
-    }
-
-    .swatch-dot.active {
-      border-color: var(--gold);
-      transform: scale(1.15);
-    }
-
-    /* Size selector pills */
-    .size-selector {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 10px;
-    }
-
-    .size-pill {
-      font-size: 0.68rem;
-      padding: 3px 6px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--muted);
-      cursor: pointer;
-      background: var(--card-surface);
-    }
-
-    .size-pill.selected {
-      border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(212, 175, 55, 0.15);
-      font-weight: 800;
-    }
-
-    .add-btn {
-      width: 100%;
-      background: var(--card-surface);
-      border: 1px solid var(--border);
-      color: var(--gold-light);
-      padding: 8px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: var(--transition);
-    }
-
-    .add-btn:active {
-      background: var(--gold);
-      color: #000;
-    }
-
-    /* Floating Cart Checkout Bar */
-    .cart-float-bar {
-      position: fixed;
-      bottom: 0;
+      top: 0;
       left: 0;
-      right: 0;
-      background: rgba(18, 21, 28, 0.94);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-top: 1px solid var(--border);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 900;
-    }
-
-    .cart-float-inner {
       width: 100%;
-      max-width: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 10;
     }
 
-    .cart-total-text span {
+    .tag-bubble {
+      position: absolute;
+      bottom: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      padding: 4px 12px;
+      border-radius: 10px;
       font-size: 0.72rem;
-      color: var(--muted);
-      display: block;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .cart-total-text strong {
+    .tag-right { right: 12px; color: #fff; }
+    .tag-left { left: 12px; color: var(--gold); }
+
+    /* نماذج الصفحات الأخرى */
+    .screen-header-title {
       font-size: 1.15rem;
-      color: var(--gold);
       font-weight: 900;
-    }
-
-    .checkout-btn {
-      background: var(--green);
-      color: #fff;
-      border: none;
-      padding: 11px 20px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.88rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    }
-
-    /* Modal Sheet Styling */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .modal-content {
-      background: #141720;
-      width: 100%;
-      max-width: 500px;
-      border-top-left-radius: 24px;
-      border-top-right-radius: 24px;
-      border: 1px solid var(--border);
-      padding: 20px 16px;
-      max-height: 88vh;
-      overflow-y: auto;
-      animation: slideUp 0.3s ease;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .modal-header h3 { font-size: 1.05rem; color: var(--gold-light); font-weight: 800; }
-    .close-btn { background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
-
-    .cart-items-list {
-      margin-bottom: 14px;
-      max-height: 180px;
-      overflow-y: auto;
-    }
-
-    .cart-item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--card-bg);
-      padding: 8px 12px;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .cart-item-info strong { display: block; color: #fff; font-size: 0.82rem; }
-    .cart-item-info small { color: var(--gold); font-size: 0.72rem; }
-
-    .qty-ctrl {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .qty-btn {
-      background: var(--card-surface);
-      border: 1px solid var(--border);
-      color: #fff;
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    /* Coupon Box */
-    .coupon-box {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .coupon-input {
-      flex: 1;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: #fff;
-      padding: 8px 12px;
-      font-size: 0.8rem;
-      outline: none;
-      text-transform: uppercase;
-    }
-
-    .coupon-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    /* Form Fields */
-    .form-label { font-size: 0.76rem; color: var(--muted); margin-bottom: 4px; display: block; font-weight: 600; }
-    .form-input, .form-select {
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: #fff;
-      padding: 9px 12px;
-      font-size: 0.82rem;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .cost-summary {
-      background: var(--card-bg);
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      margin-bottom: 14px;
-      font-size: 0.82rem;
-    }
-
-    .cost-row {
-      display: flex;
-      justify-content: space-between;
+      color: var(--gold);
       margin-bottom: 4px;
-      color: var(--muted);
     }
 
-    .cost-row.total {
-      border-top: 1px dashed var(--border);
-      padding-top: 6px;
-      font-weight: 800;
-      color: var(--gold-light);
-      font-size: 0.95rem;
+    .screen-header-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
     }
 
-    .submit-order-btn {
-      width: 100%;
-      background: var(--green);
-      color: #fff;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 0.92rem;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    /* AI Stylist Modal */
-    .stylist-card {
+    .chat-container {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 14px;
-      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 16px;
       margin-bottom: 12px;
     }
 
-    .stylist-result {
-      display: none;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 12px;
+    .chat-bubble {
+      background: #1e293b;
+      padding: 12px 14px;
+      border-radius: 14px;
       font-size: 0.82rem;
+      color: #e2e8f0;
       line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .booking-card-form {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .field-group input, .field-group select {
+      width: 100%;
+      background: #070d18;
+      border: 1px solid var(--card-border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .field-group input:focus, .field-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .submit-cta {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #070d18;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* الشريط السفلي للتطبيق */
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      background: rgba(11, 20, 36, 0.95);
+      border-top: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #64748b;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav-btn.active {
+      color: var(--gold);
+    }
+
+    .nav-icon {
+      font-size: 1.25rem;
+    }
+
+    .nav-text {
+      font-size: 0.7rem;
+      font-weight: 800;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="app-viewport">
+    
+    <div class="content-area">
 
-    <!-- VIP Header -->
-    <header class="vip-header">
-      <div class="brand-wrap">
-        <h1>MODA LUXE</h1>
-        <p>الأناقة الفاخرة • تسليم مباشر</p>
-      </div>
-      <div class="header-actions">
-        <div class="icon-btn" onclick="openStylistModal()" title="المستشار الذكي">
-          <i class="fas fa-wand-magic-sparkles"></i>
+      <!-- 1. الشاشة الأولى: الرئيسية -->
+      <section id="screenHome" class="app-screen active">
+        <!-- بانر سفاري والتطبيق الدائم -->
+        <div class="ios-pwa-banner">
+          <span>للآيفون: اضغط مشاركة في سفاري ثم "إضافة للشاشة الرئيسية" ليعمل كتطبيق دائم.</span>
+          <span class="ios-icon"></span>
         </div>
-        <div class="icon-btn" onclick="openCartModal()">
-          <i class="fas fa-shopping-bag"></i>
-          <div class="cart-badge" id="cartBadge">0</div>
-        </div>
-      </div>
-    </header>
 
-    <!-- AI Stylist Banner -->
-    <div class="ai-stylist-banner" onclick="openStylistModal()">
-      <div class="ai-banner-content">
-        <div class="ai-sparkle-box">
-          <i class="fas fa-gem"></i>
+        <!-- ترويسة العيادة -->
+        <div class="clinic-brand-row">
+          <div class="online-badge">
+            <div class="green-dot"></div>
+            العيادة تستقبل
+          </div>
+          <div class="clinic-titles">
+            <div class="brand-logo-text">ROYAL CLINIC</div>
+            <div class="brand-sub">المنظومة التخصصية للجراحة والتجميل</div>
+          </div>
         </div>
-        <div>
-          <h4>المستشار الذكي لتحديد المقاس والتنسيق</h4>
-          <p>احصل على المقاس الدقيق وتنسيق القطع المناسبة لجسمك</p>
+
+        <!-- بطاقة الدور المباشر في العيادة -->
+        <div class="live-queue-card">
+          <div class="queue-box-badge">
+            <span>رقم الدور</span>
+            <strong id="liveQueueNum">07</strong>
+          </div>
+          <div class="queue-info-text">
+            <div class="queue-title">
+              الدور المباشر في العيادة 👥
+            </div>
+            <div class="queue-note">يتم تحديث الرقم تلقائياً لتفادي الانتظار في الصالة</div>
+            <div class="queue-status">المراجع المتواجد حالياً: داخل الكشف</div>
+          </div>
         </div>
-      </div>
-      <i class="fas fa-chevron-left" style="color:var(--gold); font-size:0.8rem;"></i>
+
+        <!-- شبكة الأزرار الأربعة -->
+        <div class="quick-actions-grid">
+          <div class="action-tile" onclick="openScreen('assistant')">
+            <span class="tile-icon">🤖</span>
+            <div class="tile-texts">
+              <div class="tile-title">المساعد الذكي</div>
+              <div class="tile-desc">استشارة فورية 24 ساعة</div>
+            </div>
+          </div>
+
+          <div class="action-tile" onclick="openScreen('booking')">
+            <span class="tile-icon">📅</span>
+            <div class="tile-texts">
+              <div class="tile-title">حجز موعد VIP</div>
+              <div class="tile-desc">تثبيت فوري عبر واتساب</div>
+            </div>
+          </div>
+
+          <div class="action-tile" onclick="openScreen('analysis')">
+            <span class="tile-icon">📐</span>
+            <div class="tile-texts">
+              <div class="tile-title">محلل التناسق</div>
+              <div class="tile-desc">النسب والزوايا الجمالية</div>
+            </div>
+          </div>
+
+          <div class="action-tile" onclick="openScreen('assistant')">
+            <span class="tile-icon">📋</span>
+            <div class="tile-texts">
+              <div class="tile-title">إرشادات العمليات</div>
+              <div class="tile-desc">تعليمات ما قبل وبعد</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- المعرض السريري المقارن -->
+        <div class="gallery-head">
+          <span>🖼️</span> المعرض السريري المقارن (اسحب لمشاهدة النتيجة)
+        </div>
+
+        <div class="compare-wrapper">
+          <div class="compare-side img-state-before"></div>
+          <div class="compare-side img-state-after" id="afterBox"></div>
+          <span class="tag-bubble tag-right">الحالة قبل</span>
+          <span class="tag-bubble tag-left">نتيجة بعد 30 يوم</span>
+          <input type="range" min="0" max="100" value="50" class="compare-range" oninput="slidePhoto(this.value)">
+        </div>
+      </section>
+
+      <!-- 2. الشاشة الثانية: المساعد الذكي -->
+      <section id="screenAssistant" class="app-screen">
+        <h2 class="screen-header-title">المساعد الاستشاري 🤖</h2>
+        <p class="screen-header-sub">إرشادات بروتوكول العيادة والتعليمات الوقائية المعتمدة</p>
+
+        <div class="chat-container">
+          <div class="chat-bubble">
+            أهلاً بكم في ROYAL CLINIC. أنا نظام التوجيه السريري الآلي، تفضل بالاطلاع على التعليمات الأكثر طلباً:
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="action-tile" onclick="setNotice('تعليمات ما قبل الإجراء: الصيام 8 ساعات في حال التخدير، والتوقف عن مسيلات الدم كالأسبيرين قبل 5 أيام.')">
+              <span class="tile-desc">ما هي شروط ما قبل العمليات؟</span>
+              <span>⚠️</span>
+            </button>
+            <button class="action-tile" onclick="setNotice('فترة النقاهة: الالتزام بالكمادات الباردة أول 48 ساعة والامتناع عن السجائر لتسريع التئام الأنسجة.')">
+              <span class="tile-desc">بروتوكول ما بعد الإجراء والتعافي</span>
+              <span>🩹</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chat-bubble" id="assistantReply" style="display: none; background: #0c1c38; border: 1px solid var(--cyan);"></div>
+      </section>
+
+      <!-- 3. الشاشة الثالثة: حجز موعد VIP -->
+      <section id="screenBooking" class="app-screen">
+        <h2 class="screen-header-title">حجز استشارة VIP 📅</h2>
+        <p class="screen-header-sub">تنسيق مسبق لحفظ أسبقية الدخول مباشرة إلى غرفة الكشف</p>
+
+        <form class="booking-card-form" onsubmit="sendClinicBooking(event)">
+          <div class="field-group">
+            <label>اسم المراجع الكريم:</label>
+            <input type="text" id="patientName" placeholder="الاسم الثلاثي" required>
+          </div>
+
+          <div class="field-group">
+            <label>نوع الإجراء المطلوب:</label>
+            <select id="procedure">
+              <option value="استشارة تجميلية وتناسق">استشارة تجميلية وتناسق</option>
+              <option value="إجراء جراحي تخصصي">إجراء جراحي تخصصي</option>
+              <option value="متابعة وتقييم سريري">متابعة وتقييم سريري</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label>الموعد المفضل:</label>
+            <select id="appointmentDay">
+              <option value="السبت (12:00 - 7:00 مساءً)">السبت (12:00 - 7:00 مساءً)</option>
+              <option value="الإثنين (12:00 - 7:00 مساءً)">الإثنين (12:00 - 7:00 مساءً)</option>
+              <option value="الأربعاء (12:00 - 7:00 مساءً)">الأربعاء (12:00 - 7:00 مساءً)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-cta">
+            💬 تأكيد الحجز السريري عبر WhatsApp
+          </button>
+        </form>
+      </section>
+
+      <!-- 4. الشاشة الرابعة: محلل التناسق -->
+      <section id="screenAnalysis" class="app-screen">
+        <h2 class="screen-header-title">محلل التناسق والزوايا 📐</h2>
+        <p class="screen-header-sub">محاكاة دقيقة لمعايير النسب الجمالية للوجه والملامح</p>
+
+        <div class="chat-container" style="text-align: center; padding: 30px 16px;">
+          <div style="font-size: 3rem; margin-bottom: 10px;">✨</div>
+          <h3 style="font-size: 1rem; margin-bottom: 6px;">تقييم المعايير السريرية</h3>
+          <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
+            تعتمد المنظومة على قياس خطوط التناسق الذهبي ثلاثي الأبعاد لتقديم استشارة مخصصة لكل حالة ومحاكاة مراحل الاستشفاء.
+          </p>
+          <button class="submit-cta" style="margin-top: 18px;" onclick="openScreen('booking')">
+            طلب جلسة تحليل سريري مباشر
+          </button>
+        </div>
+      </section>
+
     </div>
 
-    <!-- Live Search -->
-    <div class="search-box">
-      <i class="fas fa-search"></i>
-      <input type="text" id="searchInput" placeholder="ابحث عن قطعة، لون، أو موديل..." oninput="handleSearch()">
-    </div>
-
-    <!-- Category Tabs -->
-    <div class="categories-bar">
-      <button class="cat-btn active" onclick="filterCategory('all', this)">كل المجموعات</button>
-      <button class="cat-btn" onclick="filterCategory('vip', this)">🌟 تشكيلة الـ VIP</button>
-      <button class="cat-btn" onclick="filterCategory('men', this)">رجالي فاخر</button>
-      <button class="cat-btn" onclick="filterCategory('women', this)">نسائي راقي</button>
-      <button class="cat-btn" onclick="filterCategory('winter', this)">معاطف وشتاء</button>
-    </div>
-
-    <!-- Products Grid -->
-    <div class="products-grid" id="productsGrid"></div>
-
-  </div>
-
-  <!-- Bottom Floating Bar -->
-  <aside class="cart-float-bar">
-    <div class="cart-float-inner">
-      <div class="cart-total-text">
-        <span>إجمالي الحقيبة:</span>
-        <strong id="barTotal">0 ل.س</strong>
+    <!-- شريط التنقل السفلي المعتمد بالصورة -->
+    <nav class="bottom-nav">
+      <div class="nav-btn active" id="btnNavHome" onclick="openScreen('home', this)">
+        <span class="nav-icon">👤</span>
+        <span class="nav-text">الرئيسية</span>
       </div>
-      <button class="checkout-btn" onclick="openCartModal()">
-        <i class="fab fa-whatsapp"></i> إتمام الطلب
-      </button>
-    </div>
-  </aside>
-
-  <!-- Cart & Checkout Modal -->
-  <div class="modal-overlay" id="cartModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3><i class="fas fa-crown" style="color:var(--gold);"></i> حقيبة المشتريات</h3>
-        <button class="close-btn" onclick="closeCartModal()">&times;</button>
+      <div class="nav-btn" id="btnNavAssistant" onclick="openScreen('assistant', this)">
+        <span class="nav-icon">💬</span>
+        <span class="nav-text">المساعد</span>
       </div>
-
-      <!-- Items -->
-      <div class="cart-items-list" id="cartList"></div>
-
-      <!-- Coupon -->
-      <label class="form-label">كوبون خصم VIP (جرب كود: VIP10)</label>
-      <div class="coupon-box">
-        <input type="text" id="couponCode" class="coupon-input" placeholder="أدخل الكوبون...">
-        <button class="coupon-btn" onclick="applyCoupon()">تطبيق</button>
+      <div class="nav-btn" id="btnNavBooking" onclick="openScreen('booking', this)">
+        <span class="nav-icon">📅</span>
+        <span class="nav-text">الحجز</span>
       </div>
-
-      <!-- Customer Form -->
-      <label class="form-label">الاسم الكامل</label>
-      <input type="text" id="clientName" class="form-input" placeholder="اسمك الكريم">
-
-      <label class="form-label">المدينة / المحافظة</label>
-      <select id="clientCity" class="form-select" onchange="calcShipping()">
-        <option value="دمشق" data-cost="25000">دمشق وريفها (شحن سريع 25,000 ل.س)</option>
-        <option value="طرطوس" data-cost="20000">طرطوس (تسليم فوري 20,000 ل.س)</option>
-        <option value="اللاذقية" data-cost="20000">اللاذقية (شحن 20,000 ل.س)</option>
-        <option value="حمص" data-cost="25000">حمص (شحن 25,000 ل.س)</option>
-        <option value="حلب" data-cost="30000">حلب (شحن 30,000 ل.س)</option>
-        <option value="محافظة أخرى" data-cost="30000">باقي المحافظات (30,000 ل.س)</option>
-      </select>
-
-      <label class="form-label">العنوان بالتفصيل ورقم بديل</label>
-      <input type="text" id="clientAddress" class="form-input" placeholder="الحي، الشارع، علامة مميزة...">
-
-      <!-- Cost Calculation -->
-      <div class="cost-summary">
-        <div class="cost-row">
-          <span>قيمة المنتجات:</span>
-          <span id="subTotalText">0 ل.س</span>
-        </div>
-        <div class="cost-row" id="discountRow" style="display:none; color:#10b981;">
-          <span>الخصم المطبق:</span>
-          <span id="discountText">0 ل.س</span>
-        </div>
-        <div class="cost-row">
-          <span>أجور التوصيل:</span>
-          <span id="shippingText">25,000 ل.س</span>
-        </div>
-        <div class="cost-row total">
-          <span>المبلغ الإجمالي النهائي:</span>
-          <span id="grandTotalText">0 ل.س</span>
-        </div>
+      <div class="nav-btn" id="btnNavAnalysis" onclick="openScreen('analysis', this)">
+        <span class="nav-icon">👁️</span>
+        <span class="nav-text">التحليل</span>
       </div>
+    </nav>
 
-      <button class="submit-order-btn" onclick="sendVipWhatsAppOrder()">
-        <i class="fab fa-whatsapp" style="font-size:1.15rem;"></i> تأكيد الطلب المباشر عبر واتساب
-      </button>
-    </div>
-  </div>
-
-  <!-- AI Stylist Advisor Modal -->
-  <div class="modal-overlay" id="stylistModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3><i class="fas fa-wand-magic-sparkles" style="color:var(--gold);"></i> المستشار الذكي للأناقة والمقاس</h3>
-        <button class="close-btn" onclick="closeStylistModal()">&times;</button>
-      </div>
-
-      <div class="stylist-card">
-        <p style="font-size:0.8rem; color:var(--muted); margin-bottom:12px;">أدخل بياناتك التقريبية وسيقوم المساعد الذكي باقتراح المقاس الدقيق وتنسيق القطع المناسبة لك:</p>
-        
-        <label class="form-label">الطول التقريبي (سم)</label>
-        <input type="number" id="userHeight" class="form-input" placeholder="مثال: 175">
-
-        <label class="form-label">الوزن التقريبي (كغ)</label>
-        <input type="number" id="userWeight" class="form-input" placeholder="مثال: 72">
-
-        <label class="form-label">طبيعة المناسبة</label>
-        <select id="userOccasion" class="form-select">
-          <option value="casual">يومي كاجوال مريح</option>
-          <option value="formal">عمل واجتماعات رسمية</option>
-          <option value="party">سهرة ومناسبة خاصة</option>
-        </select>
-
-        <button class="add-btn" style="background:var(--gold); color:#000; font-weight:900;" onclick="generateAiAdvice()">
-          تحليل واقتراح التنسيق والمقاس
-        </button>
-
-        <div class="stylist-result" id="stylistResult"></div>
-      </div>
-    </div>
   </div>
 
   <script>
-        // بيانات المنتجات الفاخرة مع الألوان والمقاسات
-    const products = [
-      {
-        id: 1,
-        title: "بليزر كشمير إيطالي دبل بريست",
-        price: 520000,
-        category: "vip",
-        image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500&q=80",
-        tag: "VIP الأكثر طلباً",
-        colors: ["#1e293b", "#0f172a", "#78350f"],
-        sizes: ["48", "50", "52", "54"]
-      },
-      {
-        id: 2,
-        title: "فستان حرير أسود ملكي ميدي",
-        price: 460000,
-        category: "women",
-        image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80",
-        tag: "إصدار حصري",
-        colors: ["#000000", "#450a0a", "#1e1b4b"],
-        sizes: ["S", "M", "L"]
-      },
-      {
-        id: 3,
-        title: "معطف صوف شتوي بريطاني جملي",
-        price: 680000,
-        category: "winter",
-        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=500&q=80",
-        tag: "شتوي فاخر",
-        colors: ["#b45309", "#1f2937"],
-        sizes: ["M", "L", "XL"]
-      },
-      {
-        id: 4,
-        title: "قميص كتان ملكي أبيض بقصة سليم",
-        price: 210000,
-        category: "men",
-        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80",
-        tag: "أساسي",
-        colors: ["#ffffff", "#94a3b8", "#1e3a8a"],
-        sizes: ["M", "L", "XL", "XXL"]
-      },
-      {
-        id: 5,
-        title: "هودي أوفر سايز صوف قطني نخب أول",
-        price: 245000,
-        category: "men",
-        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=500&q=80",
-        tag: "تريند الموسم",
-        colors: ["#d97706", "#374151", "#0284c7"],
-        sizes: ["M", "L", "XL"]
-      },
-      {
-        id: 6,
-        title: "طقم ساتان قطعتين للسهرات",
-        price: 395000,
-        category: "women",
-        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=500&q=80",
-        tag: "تشكيلة جديدة",
-        colors: ["#059669", "#d97706", "#7c3aed"],
-        sizes: ["S", "M"]
-      }
-    ];
-
-    let cart = [];
-    let currentCategory = 'all';
-    let discountPercent = 0;
-    const selectedOptions = {};
-
-    function renderProducts(list) {
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = '';
-
-      if (list.length === 0) {
-        grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:40px 10px; color:var(--muted);">لا توجد قطع مطابقة للبحث حالياً</div>`;
-        return;
-      }
-
-      list.forEach(p => {
-        if (!selectedOptions[p.id]) {
-          selectedOptions[p.id] = { size: p.sizes[0], color: p.colors[0] };
-        }
-
-        const swatchesHtml = p.colors.map(c => `
-          <div class="swatch-dot ${selectedOptions[p.id].color === c ? 'active' : ''}" 
-               style="background:${c};" 
-               onclick="selectColor(${p.id}, '${c}', this)"></div>
-        `).join('');
-
-        const sizesHtml = p.sizes.map(s => `
-          <span class="size-pill ${selectedOptions[p.id].size === s ? 'selected' : ''}" 
-                onclick="selectSize(${p.id}, '${s}', this)">${s}</span>
-        `).join('');
-
-        grid.innerHTML += `
-          <div class="product-card">
-            <div class="card-img-wrap">
-              <img src="${p.image}" alt="${p.title}" loading="lazy">
-              <span class="badge-tag">${p.tag}</span>
-            </div>
-            <div class="product-info">
-              <div>
-                <h4 class="product-title">${p.title}</h4>
-                <div class="product-price">${p.price.toLocaleString()} ل.س</div>
-                <div class="color-swatches">${swatchesHtml}</div>
-                <div class="size-selector">${sizesHtml}</div>
-              </div>
-              <button class="add-btn" onclick="addToCart(${p.id})">
-                <i class="fas fa-shopping-bag"></i> أضف للحقيبة
-              </button>
-            </div>
-          </div>
-        `;
-      });
+    // منزلق الصور التفاعلي قبل وبعد
+    function slidePhoto(val) {
+      document.getElementById('afterBox').style.width = val + '%';
     }
 
-    window.filterCategory = (cat, btn) => {
-      currentCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // التنقل السلس بين شاشات التطبيق الأربعة
+    function openScreen(screenKey, btnEl) {
+      document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
 
-      if (cat === 'all') {
-        renderProducts(products);
-      } else {
-        renderProducts(products.filter(p => p.category === cat));
+      if (screenKey === 'home') {
+        document.getElementById('screenHome').classList.add('active');
+        document.getElementById('btnNavHome').classList.add('active');
+      } else if (screenKey === 'assistant') {
+        document.getElementById('screenAssistant').classList.add('active');
+        document.getElementById('btnNavAssistant').classList.add('active');
+      } else if (screenKey === 'booking') {
+        document.getElementById('screenBooking').classList.add('active');
+        document.getElementById('btnNavBooking').classList.add('active');
+      } else if (screenKey === 'analysis') {
+        document.getElementById('screenAnalysis').classList.add('active');
+        document.getElementById('btnNavAnalysis').classList.add('active');
       }
-    };
-
-    window.handleSearch = () => {
-      const q = document.getElementById('searchInput').value.trim().toLowerCase();
-      let filtered = (currentCategory === 'all') ? products : products.filter(p => p.category === currentCategory);
-      if (q) {
-        filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.tag.toLowerCase().includes(q));
-      }
-      renderProducts(filtered);
-    };
-
-    window.selectColor = (id, color, elm) => {
-      selectedOptions[id].color = color;
-      elm.parentElement.querySelectorAll('.swatch-dot').forEach(d => d.classList.remove('active'));
-      elm.classList.add('active');
-    };
-
-    window.selectSize = (id, size, elm) => {
-      selectedOptions[id].size = size;
-      elm.parentElement.querySelectorAll('.size-pill').forEach(s => s.classList.remove('selected'));
-      elm.classList.add('selected');
-    };
-
-    window.addToCart = (id) => {
-      const p = products.find(x => x.id === id);
-      const opts = selectedOptions[id];
-
-      const exist = cart.find(item => item.id === id && item.size === opts.size && item.color === opts.color);
-      if (exist) {
-        exist.qty += 1;
-      } else {
-        cart.push({
-          id: p.id,
-          title: p.title,
-          price: p.price,
-          size: opts.size,
-          color: opts.color,
-          qty: 1
-        });
-      }
-      updateCartUI();
-    };
-
-    function updateCartUI() {
-      const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
-      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-
-      document.getElementById('cartBadge').textContent = totalQty;
-      document.getElementById('barTotal').textContent = subtotal.toLocaleString() + ' ل.س';
-      document.getElementById('subTotalText').textContent = subtotal.toLocaleString() + ' ل.س';
-
-      const list = document.getElementById('cartList');
-      if (cart.length === 0) {
-        list.innerHTML = `<p style="text-align:center; color:var(--muted); padding:20px;">الحقيبة فارغة حالياً</p>`;
-      } else {
-        list.innerHTML = cart.map((item, idx) => `
-          <div class="cart-item-row">
-            <div class="cart-item-info">
-              <strong>${item.title}</strong>
-              <small>المقاس: ${item.size} | ${(item.price * item.qty).toLocaleString()} ل.س</small>
-            </div>
-            <div class="qty-ctrl">
-              <button class="qty-btn" onclick="updateQty(${idx}, -1)">-</button>
-              <span style="font-weight:700; font-size:0.85rem;">${item.qty}</span>
-              <button class="qty-btn" onclick="updateQty(${idx}, 1)">+</button>
-            </div>
-          </div>
-        `).join('');
-      }
-      calcShipping();
     }
 
-    window.updateQty = (index, delta) => {
-      cart[index].qty += delta;
-      if (cart[index].qty <= 0) cart.splice(index, 1);
-      updateCartUI();
-    };
+    // استعراض رسائل المساعد الذكي
+    function setNotice(text) {
+      const reply = document.getElementById('assistantReply');
+      reply.innerText = text;
+      reply.style.display = 'block';
+    }
 
-    window.calcShipping = () => {
-      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-      const select = document.getElementById('clientCity');
-      let shipCost = parseInt(select.options[select.selectedIndex].getAttribute('data-cost') || 25000);
+    // إرسال الحجز وتوثيقه عبر واتساب العيادة المعتمد
+    function sendClinicBooking(e) {
+      e.preventDefault();
 
-      if (subtotal >= 600000 && subtotal > 0) {
-        shipCost = 0;
-        document.getElementById('shippingText').innerHTML = `<span style="color:#10b981; font-weight:800;">مجاني (عرض VIP)</span>`;
-      } else {
-        document.getElementById('shippingText').textContent = shipCost.toLocaleString() + ' ل.س';
-      }
+      const name = document.getElementById('patientName').value.trim();
+      const procedure = document.getElementById('procedure').value;
+      const day = document.getElementById('appointmentDay').value;
+      const code = 'ROYAL-' + Math.floor(1000 + Math.random() * 9000);
 
-      let discountAmount = 0;
-      if (discountPercent > 0) {
-        discountAmount = Math.round(subtotal * (discountPercent / 100));
-        document.getElementById('discountRow').style.display = 'flex';
-        document.getElementById('discountText').textContent = `- ${discountAmount.toLocaleString()} ل.س`;
-      } else {
-        document.getElementById('discountRow').style.display = 'none';
-      }
+      const msg = `السلام عليكم ورحمة الله 🩺\n` +
+                  `*حجز موعد واستشارة VIP (ROYAL CLINIC):*\n\n` +
+                  `🔖 *كود الملف:* ${code}\n` +
+                          `👤 *اسم المراجع:* ${name}\n` +
+                  `📋 *الإجراء المطلوب:* ${procedure}\n` +
+                  `📅 *الموعد المفضل:* ${day}\n\n` +
+                  `يرجى تأكيد الحجز وإرسال تفاصيل الدور.`;
 
-      const grandTotal = Math.max(0, subtotal - discountAmount + (subtotal > 0 ? shipCost : 0));
-      document.getElementById('grandTotalText').textContent = grandTotal.toLocaleString() + ' ل.س';
-    };
-
-    window.applyCoupon = () => {
-      const code = document.getElementById('couponCode').value.trim().toUpperCase();
-      if (code === 'VIP10') {
-        discountPercent = 10;
-        alert("تم تفعيل خصم 10% الخاص بعملاء VIP بنجاح!");
-      } else {
-        discountPercent = 0;
-        alert("كود الخصم غير صحيح أو منتهي الصلاحية");
-      }
-      calcShipping();
-    };
-
-    window.sendVipWhatsAppOrder = () => {
-      if (cart.length === 0) {
-        alert("يرجى اختيار قطع وإضافتها للحقيبة أولاً");
-        return;
-      }
-
-      const name = document.getElementById('clientName').value.trim();
-      const city = document.getElementById('clientCity').value;
-      const address = document.getElementById('clientAddress').value.trim();
-
-      if (!name || !address) {
-        alert("يرجى تعبئة الاسم والعنوان بالتفصيل لإتمام الحجز والشحن");
-        return;
-      }
-
-      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-      const grandTotal = document.getElementById('grandTotalText').textContent;
-      const orderId = "VIP-" + Math.floor(1000 + Math.random() * 9000);
-
-      let itemsText = "";
-      cart.forEach((item, index) => {
-        itemsText += `\n${index + 1}. *${item.title}*\n   - المقاس: [ ${item.size} ]\n   - الكمية: ${item.qty} × ${item.price.toLocaleString()} ل.س`;
-      });
-
-      const message = `تاج الأناقة | طلب شراء VIP رسمي 🛍️
-رقم الفاتورة: ${orderId}
----------------------------------
-👤 العميل: ${name}
-📍 الوجهة: ${city} - ${address}
----------------------------------
-📦 تفاصيل القطع:${itemsText}
----------------------------------
-💵 قيمة المنتجات: ${subtotal.toLocaleString()} ل.س
-${discountPercent > 0 ? `🎟️ خصم الكوبون: ${discountPercent}%\n` : ''}🚚 الشحن: ${document.getElementById('shippingText').innerText}
-💰 *المجموع النهائي واجب الدفع: ${grandTotal}*
----------------------------------
-يرجى تأكيد الحجز وجدولة الإرسال.`;
-
-      const phone = "963995382496";
-      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    };
-
-    window.openCartModal = () => {
-      document.getElementById('cartModal').style.display = 'flex';
-      updateCartUI();
-    };
-    window.closeCartModal = () => document.getElementById('cartModal').style.display = 'none';
-
-    window.openStylistModal = () => document.getElementById('stylistModal').style.display = 'flex';
-    window.closeStylistModal = () => document.getElementById('stylistModal').style.display = 'none';
-
-    window.generateAiAdvice = () => {
-      const h = parseInt(document.getElementById('userHeight').value);
-      const w = parseInt(document.getElementById('userWeight').value);
-      const occ = document.getElementById('userOccasion').value;
-      const res = document.getElementById('stylistResult');
-
-      if (!h || !w) {
-        alert("يرجى إدخال الطول والوزن التقريبي");
-        return;
-      }
-
-      let recSize = "M";
-      const bmi = w / ((h / 100) * (h / 100));
-
-      if (bmi < 20) recSize = "S (أو مقاس 48)";
-      else if (bmi >= 20 && bmi <= 25) recSize = "M (أو مقاس 50)";
-      else if (bmi > 25 && bmi <= 29) recSize = "L (أو مقاس 52)";
-      else recSize = "XL إلى XXL (أو مقاس 54)";
-
-      let recPieces = "";
-      if (occ === "formal") recPieces = "ننصحك بتنسيق: *بليزر كشمير إيطالي دبل بريست* مع قميص الكتان الأبيض لإطلالة واثقة وجذابة.";
-      else if (occ === "party") recPieces = "الخيار الأنسب لمناسبتك هو: *فستان الحرير الملكي* أو *طقم الساتان للسهرات*.";
-      else recPieces = "للإطلالة اليومية الفاخرة ننصحك بـ: *كنزة الهودي الصوفية الأوفر سايز* مع بنطال كتان.";
-
-      res.style.display = 'block';
-      res.innerHTML = `
-        <div style="color:var(--gold-light); font-weight:800; margin-bottom:4px;">✨ نتيجة الاستشارة الذكية:</div>
-        <div>• المقاس المثالي الموصى به لجسمك: <strong style="color:var(--gold); font-size:0.95rem;">[ ${recSize} ]</strong></div>
-        <div style="margin-top:6px;">• التنسيق المقترح: ${recPieces}</div>
-      `;
-    };
-
-    window.onclick = (e) => {
-      if (e.target.classList.contains('modal-overlay')) {
-        closeCartModal();
-        closeStylistModal();
-      }
-    };
-
-    renderProducts(products);
+      const targetPhone = "963995382496";
+      window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
   </script>
 </body>
 </html>
